@@ -26,7 +26,7 @@ export async function getUsage(sb: ReturnType<typeof serverClient>, userId: stri
 export async function gemini(prompt: string, system?: string) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY is not configured on the server.");
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3.8-flash";
   const started = Date.now();
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
     method: "POST",

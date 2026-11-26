@@ -86,3 +86,10 @@ end $$;
 create policy "subs_read" on public.subscriptions for select using (auth.uid() = user_id);
 create policy "subs_request" on public.subscriptions for insert with check (auth.uid() = user_id and status = 'pending');
 -- contact_messages: inserts happen through the server route with the service role; no public policies.
+
+-- Table privileges (newer Supabase projects do not grant these automatically).
+-- RLS above still restricts every row to its owner.
+grant usage on schema public to anon, authenticated, service_role;
+grant select, insert, update, delete on public.projects, public.traces, public.evaluations, public.prompts, public.monitors to authenticated;
+grant select, insert on public.subscriptions to authenticated;
+grant all on all tables in schema public to service_role;
