@@ -32,10 +32,10 @@ export default async function Billing({ searchParams }: { searchParams: { plan?:
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {plans.map((p) => (
           <form key={p.id} action={requestPlan} className={`card p-5 ${searchParams.plan === p.id ? "border-lime" : ""}`}>
-            <h3 className="text-xl font-semibold">{p.name} · ${p.price}/mo</h3>
-            <ul className="mt-3 space-y-1 text-sm text-white/75">{p.features.map((f) => <li key={f}>✓ {f}</li>)}</ul>
+            <h3 className="text-xl font-semibold">{p.name}, ${p.price} per month</h3>
+            <ul className="mt-3 space-y-1 text-sm text-white/75">{p.features.map((f) => <li key={f}>{f}</li>)}</ul>
             <input type="hidden" name="plan" value={p.id} />
-            <button disabled={plan === p.id} className="btn btn-primary mt-4 w-full disabled:opacity-40">{plan === p.id ? "Current plan" : "Pay & upgrade"}</button>
+            <button disabled={plan === p.id} className="btn btn-primary mt-4 w-full disabled:opacity-40">{plan === p.id ? "Current plan" : "Upgrade"}</button>
           </form>
         ))}
       </div>

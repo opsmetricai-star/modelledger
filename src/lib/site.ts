@@ -1,4 +1,5 @@
 export const BRAND = "ModelLedger";
+
 export const PAY = {
   starter: process.env.NEXT_PUBLIC_PAY_STARTER || "https://selar.com/47plan?currency=USD",
   team: process.env.NEXT_PUBLIC_PAY_TEAM || "https://selar.com/57plan?currency=USD",
@@ -6,42 +7,140 @@ export const PAY = {
 };
 
 export const products = [
-  { slug: "traces", name: "Traces", blurb: "Explore and debug AI applications", icon: "chat",
-    headline: "See every step your AI takes", body: "Capture each model call, tool call and retrieval as a nested trace. Filter, compare and replay runs to find exactly where an agent went wrong.",
-    points: ["Automatic capture with one decorator", "Nested call trees with latency and token cost", "Search across inputs, outputs and metadata", "Share a trace link with your team"] },
-  { slug: "evaluations", name: "Evaluations", blurb: "Rigorous evaluations of AI applications", icon: "bars",
-    headline: "Measure quality before users do", body: "Score applications against curated datasets with code scorers or model judges, then compare versions side by side before you ship.",
-    points: ["Dataset versioning", "Code and LLM-judge scorers", "Side-by-side version comparison", "Regression alerts in CI"] },
-  { slug: "playground", name: "Playground", blurb: "Explore prompts and models", icon: "play",
-    headline: "Iterate on prompts in minutes", body: "Open any traced call in the playground, swap the model or edit the prompt, and rerun it against real production inputs.",
-    points: ["Run against traced inputs", "Compare models in parallel", "Save prompt versions", "Promote a prompt to production"] },
-  { slug: "monitors", name: "Monitors", blurb: "Continuously improve in production", icon: "search",
-    headline: "Keep quality visible in production", body: "Attach scorers to live traffic, watch quality trends and get alerted when behaviour drifts from your baseline.",
-    points: ["Online scoring of live traffic", "Drift and cost alerts", "Slack and email notifications", "Auto-curate failures into datasets"] },
+  {
+    slug: "traces",
+    name: "Traces",
+    blurb: "Capture and diagnose every AI decision",
+    icon: "chat",
+    headline: "Every AI decision, recorded and diagnosed",
+    body: "Traces capture each model call, tool call and retrieval as a structured record with latency, token volume and cost. On the Pro plan, the analysis engine reads a failing trace and returns a summary, a likely root cause and ranked remediation steps.",
+    points: [
+      "Structured records of inputs, outputs, latency, tokens and cost",
+      "Nested spans that show where time and spend accumulate",
+      "AI root-cause analysis on any trace (Pro plan)",
+      "Usage metering against your plan, visible in real time",
+    ],
+  },
+  {
+    slug: "evaluations",
+    name: "Evaluations",
+    blurb: "Score output quality before release",
+    icon: "bars",
+    headline: "Quantify output quality before it reaches a customer",
+    body: "Run a prompt template across a dataset of expected outcomes and receive a deterministic pass rate per row and per run. Release decisions rest on measured quality, not on spot checks.",
+    points: [
+      "Dataset rows with expected outcomes",
+      "Exact-match and contains scorers with reproducible results",
+      "Full run history for version-over-version comparison",
+      "Every evaluated call is traced and metered",
+    ],
+  },
+  {
+    slug: "playground",
+    name: "Playground",
+    blurb: "Iterate on prompts with live model output",
+    icon: "play",
+    headline: "Shorten the path from failing prompt to verified fix",
+    body: "Run prompts against a live model, inspect latency and token cost on every run, and save versioned prompts for the team. Each run is written to Traces automatically.",
+    points: [
+      "Live model execution with system instructions",
+      "Latency and token cost reported on every run",
+      "Named, versioned prompt library",
+      "Every run recorded as a trace",
+    ],
+  },
+  {
+    slug: "monitors",
+    name: "Monitors",
+    blurb: "Automated alerts on cost, speed and errors",
+    icon: "search",
+    headline: "Automated thresholds on the metrics that carry risk",
+    body: "Define limits on average latency, spend and error rate. Monitors evaluate the last 24 hours of traces and flag any breach, so operators act on a signal instead of reading logs.",
+    points: [
+      "Thresholds on latency, cost and error rate",
+      "Evaluation over a rolling 24-hour window",
+      "Clear alert state for every monitor",
+      "Available on the Team and Pro plans",
+    ],
+  },
 ];
 
-export const useCases = ["AI governance","Computer vision","Contact centers","Evaluations","Fine-tune LLMs","Physical AI","RAG","Train LLMs"];
-export const industries = ["Autonomous Vehicles","Communications","Financial Services","Healthcare & Life Sciences","Public Sector","Scientific Research"];
-export const caseStudies = [
-  { name: "Northwind Design", note: "How Northwind ships generative features with confidence", initial: "N" },
-  { name: "Halcyon Cloud", note: "How Halcyon tracks every ML experiment across teams", initial: "H" },
-  { name: "Torque Motors", note: "How Torque validates models for autonomous driving", initial: "T" },
+export const useCases = [
+  {
+    name: "Agent reliability",
+    summary: "Multi-step agents fail in ways a single log line never shows. Traces expose every step, and the analysis engine isolates the step that broke the outcome.",
+  },
+  {
+    name: "RAG quality",
+    summary: "Retrieval errors become wrong answers at scale. Evaluations score answers against expected facts so retrieval changes ship with a measured effect.",
+  },
+  {
+    name: "Contact center AI",
+    summary: "Automated support carries brand and compliance risk on every conversation. Monitors surface error and latency breaches before they reach customers.",
+  },
+  {
+    name: "AI governance",
+    summary: "Auditors ask what the model did and why. A complete trace record answers with evidence: inputs, outputs, model, time and cost.",
+  },
+  {
+    name: "Release evaluation",
+    summary: "Replace subjective review with a pass rate. Every prompt or model change is scored against the same dataset before release.",
+  },
 ];
-export const slugify = (s: string) => s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+export const industries = [
+  {
+    name: "Financial Services",
+    summary: "Model-driven decisions in lending, fraud and servicing require a defensible record. ModelLedger retains the evidence trail and quantifies quality before a change goes live.",
+  },
+  {
+    name: "Healthcare & Life Sciences",
+    summary: "Clinical and operational AI demands traceability. Teams record every model interaction and measure output accuracy against expected results.",
+  },
+  {
+    name: "Communications",
+    summary: "High-volume customer interactions magnify small model errors. Monitors on latency, cost and error rate keep automated service inside defined limits.",
+  },
+  {
+    name: "Public Sector",
+    summary: "Public accountability requires explainable automation. A searchable trace history documents how each automated outcome was produced.",
+  },
+];
+
+export const slugify = (s: string) =>
+  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export const plans = [
-  { id: "starter", name: "Starter", price: 47, tagline: "For individuals shipping their first AI app", link: PAY.starter,
-    features: ["1 user", "10,000 traced calls / month", "3 projects", "7-day trace retention", "Community support"] },
-  { id: "team", name: "Team", price: 57, tagline: "For small teams that need shared visibility", link: PAY.team, popular: true,
-    features: ["Up to 5 users", "100,000 traced calls / month", "Unlimited projects", "30-day trace retention", "Evaluations & monitors", "Email support"] },
-  { id: "pro", name: "Pro", price: 97, tagline: "For production workloads at scale", link: PAY.pro,
-    features: ["Up to 20 users", "1,000,000 traced calls / month", "Unlimited projects", "1-year trace retention", "AI-assisted trace analysis", "Priority support"] },
+  {
+    id: "starter",
+    name: "Starter",
+    price: 47,
+    tagline: "Instrument your first production AI workflow",
+    link: PAY.starter,
+    features: ["10,000 traced calls per month", "Traces with cost and latency", "Playground with versioned prompts", "API keys for trace ingestion"],
+  },
+  {
+    id: "team",
+    name: "Team",
+    price: 57,
+    tagline: "Measure quality and automate alerting",
+    link: PAY.team,
+    popular: true,
+    features: ["100,000 traced calls per month", "Everything in Starter", "Evaluations with deterministic scoring", "Monitors on latency, cost and error rate"],
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: 97,
+    tagline: "Add AI diagnosis at production scale",
+    link: PAY.pro,
+    features: ["1,000,000 traced calls per month", "Everything in Team", "AI root-cause analysis on every trace"],
+  },
 ];
 
-export const footerCols = [
-  { title: "Platform", links: [["Traces","/product/traces"],["Evaluations","/product/evaluations"],["Playground","/product/playground"],["Monitors","/product/monitors"],["Pricing","/pricing"]] },
-  { title: "Solutions", links: useCases.slice(0,5).map(u => [u, `/solutions/${slugify(u)}`]) },
-  { title: "Industries", links: industries.map(u => [u, `/industries/${slugify(u)}`]) },
-  { title: "Resources", links: [["Documentation","/docs"],["Case studies","/customers"],["Blog","/blog"],["Support","/contact"]] },
-  { title: "Company", links: [["About","/about"],["Enterprise","/enterprise"],["Contact","/contact"],["Security","/enterprise#security"]] },
+export const footerCols: { title: string; links: [string, string][] }[] = [
+  { title: "Platform", links: products.map((p) => [p.name, `/product/${p.slug}`] as [string, string]) },
+  { title: "Solutions", links: useCases.map((u) => [u.name, `/solutions/${slugify(u.name)}`] as [string, string]) },
+  { title: "Industries", links: industries.map((u) => [u.name, `/industries/${slugify(u.name)}`] as [string, string]) },
+  { title: "Company", links: [["About", "/about"], ["Documentation", "/docs"], ["Pricing", "/pricing"]] },
 ];

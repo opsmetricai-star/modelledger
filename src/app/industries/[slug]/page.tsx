@@ -3,20 +3,20 @@ import PageHero from "@/components/PageHero";
 import { industries, slugify } from "@/lib/site";
 
 export function generateStaticParams() {
-  return industries.map((u) => ({ slug: slugify(u) }));
+  return industries.map((u) => ({ slug: slugify(u.name) }));
 }
 
 export default function Industry({ params }: { params: { slug: string } }) {
-  const name = industries.find((u) => slugify(u) === params.slug);
-  if (!name) notFound();
+  const u = industries.find((x) => slugify(x.name) === params.slug);
+  if (!u) notFound();
   const blocks = [
-    ["Auditability", `Keep a complete, searchable record of model behaviour that ${name} teams can show to reviewers.`],
-    ["Reliability", `Catch regressions before they reach users with evaluations tuned to ${name} requirements.`],
-    ["Control", `Role-based access and dedicated deployment options for sensitive ${name} data.`],
+    ["Evidence", "A searchable record of every model interaction, ready for internal review and external audit."],
+    ["Quality", "Pass rates against expected outcomes quantify accuracy before each change reaches production."],
+    ["Oversight", "Automated thresholds on latency, cost and error rate keep live systems inside defined limits."],
   ];
   return (
     <main>
-      <PageHero eyebrow="Industries" title={`AI for ${name}`} body={`How ${name} organisations use ModelLedger to move from experiments to dependable production systems.`} />
+      <PageHero eyebrow="Industries" title={u.name} body={u.summary} />
       <section className="bg-ink-850 py-20">
         <div className="container-x grid gap-6 md:grid-cols-3">
           {blocks.map(([t, d]) => (

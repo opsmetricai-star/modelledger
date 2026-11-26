@@ -29,7 +29,7 @@ export default async function DashLayout({ children }: { children: React.ReactNo
         <nav className="flex gap-1 overflow-x-auto md:flex-col">
           {items.map(([l, h]) => <Link key={l} href={h} className="whitespace-nowrap rounded-md px-3 py-2.5 text-[15px] hover:bg-ink-700 hover:text-lime">{l}</Link>)}
         </nav>
-        <form action={signOut} className="mt-4 hidden md:block"><button className="w-full rounded-md px-3 py-2.5 text-left text-sm text-white/60 hover:text-white">Sign out</button></form>
+        <form action={signOut} className="mt-3 md:mt-4"><button className="w-full rounded-md border border-white/15 px-3 py-2.5 text-left text-sm text-white/80 hover:border-lime hover:text-lime">Log out</button></form>
       </aside>
       <div className="min-w-0 flex-1 p-5 sm:p-8">{children}</div>
     </div>

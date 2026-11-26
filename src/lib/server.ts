@@ -1,5 +1,5 @@
 import { createClient as createAdmin } from "@supabase/supabase-js";
-import { serverClient } from "./supabase-server";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const LIMITS: Record<string, number> = { free: 1000, starter: 10000, team: 100000, pro: 1000000 };
 
@@ -11,12 +11,12 @@ export const isAdmin = (email?: string | null) =>
   !!email && (process.env.ADMIN_EMAILS || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean).includes(email.toLowerCase());
 
 /** Active plan = latest subscription with status 'active', else free. Redirect alone never activates a plan. */
-export async function getPlan(sb: ReturnType<typeof serverClient>, userId: string) {
+export async function getPlan(sb: SupabaseClient, userId: string) {
   const { data } = await sb.from("subscriptions").select("plan").eq("user_id", userId).eq("status", "active").order("verified_at", { ascending: false }).limit(1);
   return data?.[0]?.plan ?? "free";
 }
 
-export async function getUsage(sb: ReturnType<typeof serverClient>, userId: string) {
+export async function getUsage(sb: SupabaseClient, userId: string) {
   const since = new Date(); since.setDate(1); since.setHours(0, 0, 0, 0);
   const { count } = await sb.from("traces").select("id", { count: "exact", head: true }).eq("user_id", userId).gte("created_at", since.toISOString());
   return count ?? 0;

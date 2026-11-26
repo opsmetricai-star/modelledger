@@ -5,8 +5,7 @@ export async function middleware(req: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) {
-    // Supabase not configured: send protected routes to login, which explains the setup.
-    return NextResponse.redirect(new URL("/login?setup=1", req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
   let res = NextResponse.next({ request: req });
   const supabase = createServerClient(url, key, {

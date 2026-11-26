@@ -9,8 +9,8 @@ const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-sans", weight
 const hand = Caveat({ subsets: ["latin"], variable: "--font-hand", weight: ["700"] });
 
 export const metadata: Metadata = {
-  title: "ModelLedger — the AI developer platform",
-  description: "Build, evaluate and monitor AI agents, applications and models with confidence.",
+  title: "ModelLedger: the AI-native operating layer for enterprise AI",
+  description: "ModelLedger records every model decision, scores output quality, detects breaches and diagnoses root causes for enterprise AI operations.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -9,8 +9,8 @@ export default function PageHero({ eyebrow, title, body, cta = true }: { eyebrow
         {body && <p className="mx-auto mt-6 max-w-2xl text-xl text-white/80">{body}</p>}
         {cta && (
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" className="btn btn-primary">Start for free</Link>
-            <Link href="/contact" className="btn btn-ghost">Book a demo</Link>
+            <Link href="/signup" className="btn btn-primary">Sign up</Link>
+            <Link href="/login" className="btn btn-ghost">Log in</Link>
           </div>
         )}
       </div>

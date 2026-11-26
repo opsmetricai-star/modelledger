@@ -3,20 +3,20 @@ import PageHero from "@/components/PageHero";
 import { useCases, slugify } from "@/lib/site";
 
 export function generateStaticParams() {
-  return useCases.map((u) => ({ slug: slugify(u) }));
+  return useCases.map((u) => ({ slug: slugify(u.name) }));
 }
 
 export default function Solution({ params }: { params: { slug: string } }) {
-  const name = useCases.find((u) => slugify(u) === params.slug);
-  if (!name) notFound();
+  const u = useCases.find((x) => slugify(x.name) === params.slug);
+  if (!u) notFound();
   const blocks = [
-    ["Capture", `Record every input, output and intermediate step in your ${name} workflow so nothing is a black box.`],
-    ["Measure", `Define what good looks like for ${name} and score every run against it automatically.`],
-    ["Improve", `Use failing cases as a to-do list: fix, rerun, compare, and promote only what is measurably better.`],
+    ["Record", "Every input, output, model and cost is captured as a structured trace, so no decision is a black box."],
+    ["Measure", "Datasets of expected outcomes and deterministic scorers turn quality into a number you can track."],
+    ["Resolve", "Monitors flag breaches, and the analysis engine isolates the cause on Pro, so teams fix the right thing first."],
   ];
   return (
     <main>
-      <PageHero eyebrow="Solutions" title={`${name} with ModelLedger`} body={`Everything your team needs to build, measure and improve ${name} workloads in one place.`} />
+      <PageHero eyebrow="Solutions" title={u.name} body={u.summary} />
       <section className="bg-ink-850 py-20">
         <div className="container-x grid gap-6 md:grid-cols-3">
           {blocks.map(([t, d]) => (

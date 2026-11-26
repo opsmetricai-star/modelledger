@@ -93,3 +93,18 @@ grant usage on schema public to anon, authenticated, service_role;
 grant select, insert, update, delete on public.projects, public.traces, public.evaluations, public.prompts, public.monitors to authenticated;
 grant select, insert on public.subscriptions to authenticated;
 grant all on all tables in schema public to service_role;
+
+-- API keys for trace ingestion. Only a SHA-256 hash is stored; the key is shown once at creation.
+create table if not exists public.api_keys (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  name text not null,
+  prefix text not null,
+  key_hash text not null unique,
+  created_at timestamptz not null default now(),
+  last_used_at timestamptz
+);
+alter table public.api_keys enable row level security;
+create policy "api_keys_own" on public.api_keys for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+grant select, delete on public.api_keys to authenticated;
+grant all on public.api_keys to service_role;

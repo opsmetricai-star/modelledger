@@ -27,7 +27,7 @@ export default async function Overview() {
         {tiles.map(([l, v]) => <div key={l} className="card p-5"><div className="text-sm text-white/60">{l}</div><div className="mt-1 text-2xl font-semibold text-lime">{v}</div></div>)}
       </div>
       <div className="card mt-6 p-5"><h2 className="mb-3 text-lg font-semibold">Traced calls, last 14 days</h2><UsageChart data={chart} /></div>
-      {n === 0 && <p className="mt-6 text-white/70">No traces yet. Run a prompt in the <Link href="/dashboard/playground" className="text-lime underline">Playground</Link> or post to <code>/api/ingest</code>.</p>}
+      {n === 0 && <p className="mt-6 text-white/70">No traces recorded yet. Run a prompt in the <Link href="/dashboard/playground" className="text-lime underline">Playground</Link>, or create an API key in <Link href="/dashboard/settings" className="text-lime underline">Settings</Link> to send traces from your systems.</p>}
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default async function Evaluations() {
           <details key={e.id} className="card p-4">
             <summary className="cursor-pointer"><b>{e.name}</b> <span className="ml-2 text-lime">{e.score}%</span> <span className="text-xs text-white/50">{e.scorer} · {new Date(e.created_at).toLocaleString()}</span></summary>
             <table className="mt-3 w-full text-left text-sm"><thead className="text-white/50"><tr><th>Input</th><th>Expected</th><th>Output</th><th>Pass</th></tr></thead>
-              <tbody>{(e.results as { input: string; expected: string; output: string; pass: boolean }[]).map((r, i) => <tr key={i} className="border-t border-white/10 align-top"><td className="py-2 pr-2">{r.input}</td><td className="pr-2">{r.expected}</td><td className="pr-2">{r.output.slice(0, 160)}</td><td className={r.pass ? "text-lime" : "text-red-400"}>{r.pass ? "✓" : "✗"}</td></tr>)}</tbody></table>
+              <tbody>{(e.results as { input: string; expected: string; output: string; pass: boolean }[]).map((r, i) => <tr key={i} className="border-t border-white/10 align-top"><td className="py-2 pr-2">{r.input}</td><td className="pr-2">{r.expected}</td><td className="pr-2">{r.output.slice(0, 160)}</td><td className={r.pass ? "text-lime" : "text-red-400"}>{r.pass ? "Pass" : "Fail"}</td></tr>)}</tbody></table>
           </details>
         ))}
       </div>

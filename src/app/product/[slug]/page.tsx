@@ -27,11 +27,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       </section>
       <section className="bg-ink-900 py-20">
         <div className="container-x">
-          <h2 className="mb-10 text-center text-3xl font-semibold">Works with the rest of the platform</h2>
+          <h2 className="mb-10 text-center text-3xl font-semibold">Runs on the same system of record</h2>
           <div className="grid gap-5 md:grid-cols-3">
             {others.map((o) => (
               <Link key={o.slug} href={`/product/${o.slug}`} className="card flex items-center gap-4 p-6 hover:border-lime/60">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink-700"><ProductIcon kind={o.icon} /></span>
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-ink-700"><ProductIcon kind={o.icon} /></span>
                 <span><span className="block font-semibold">{o.name}</span><span className="text-sm text-white/70">{o.blurb}</span></span>
               </Link>
             ))}
